@@ -104,7 +104,8 @@ void Word::key_pressed_processor(const sf::Event::KeyEvent& pressed_key_evnt)
 	unsigned char pressed_key = pressed_key_evnt.code;
 
 	// convert pressed key to char
-	if (pressed_key_evnt.code >= sf::Keyboard::Key::A && pressed_key_evnt.code <= sf::Keyboard::Key::Z && pressed_key_evnt.alt == false && pressed_key_evnt.control == false)	// if letter in the alphabet
+	// if letter in the alphabet
+	if (pressed_key_evnt.code >= sf::Keyboard::Key::A && pressed_key_evnt.code <= sf::Keyboard::Key::Z && pressed_key_evnt.alt == false && pressed_key_evnt.control == false)
 	{
 		pressed_key -= sf::Keyboard::Key::A;
 		if (pressed_key_evnt.shift == true)
@@ -112,12 +113,20 @@ void Word::key_pressed_processor(const sf::Event::KeyEvent& pressed_key_evnt)
 		else
 			pressed_key += 'a';
 	}
-	else if (pressed_key_evnt.code >= sf::Keyboard::Key::Num0 && pressed_key_evnt.code <= sf::Keyboard::Key::Num9 && pressed_key_evnt.shift == false && pressed_key_evnt.alt == false && pressed_key_evnt.control == false)	// if number
+	// if number
+	else if (
+		pressed_key_evnt.code >= sf::Keyboard::Key::Num0 && pressed_key_evnt.code <= sf::Keyboard::Key::Num9 &&
+		pressed_key_evnt.shift == false && pressed_key_evnt.alt == false && pressed_key_evnt.control == false
+	)
 	{
 		pressed_key -= sf::Keyboard::Key::Num0;
 		pressed_key += '0';
 	}
-	else if (pressed_key_evnt.code >= sf::Keyboard::Key::Numpad0 && pressed_key_evnt.code <= sf::Keyboard::Key::Numpad9 && pressed_key_evnt.shift == false && pressed_key_evnt.alt == false && pressed_key_evnt.control == false)	// if number (on numpad)
+	// if number (on numpad)
+	else if (
+		pressed_key_evnt.code >= sf::Keyboard::Key::Numpad0 && pressed_key_evnt.code <= sf::Keyboard::Key::Numpad9 &&
+		pressed_key_evnt.shift == false && pressed_key_evnt.alt == false && pressed_key_evnt.control == false
+	)
 	{
 		pressed_key -= sf::Keyboard::Key::Numpad0;
 		pressed_key += '0';

@@ -22,8 +22,10 @@ template <typename T> void delete_list(list<T>& list_in)
 	for (auto entity_it = list_in.begin(); entity_it != list_in.end(); )	// iterator is used to point at the Elements of the list. get the fitting type automatically with auto
 	{
 		T entity_tmp = *entity_it;				// store the current Element to still have a pointer on it after the erase from the list and to delete it afterwards
-		entity_it = list_in.erase(entity_it);	// delete the Element from the list pointed by the iterator. return a new iterator with the updated list which points on the Element after the deleted one
-		delete entity_tmp;						// after the element is erased from the list, delete must still be called. delete calls the destructor and frees up the memory that was allocated by new.
+		// delete the Element from the list pointed by the iterator. return a new iterator with the updated list which points on the Element after the deleted one
+		entity_it = list_in.erase(entity_it);
+		// after the element is erased from the list, delete must still be called. delete calls the destructor and frees up the memory that was allocated by new.
+		delete entity_tmp;
 	}
 }
 
@@ -36,7 +38,8 @@ void physic_task(list<Entity*>& phys_entity, bool& running)
 	{
 		for (list<Entity*>::iterator entity_it = phys_entity.begin(); entity_it != phys_entity.end(); entity_it++)	// iterator is used to point at the Elements of the list.
 		{
-			(*entity_it)->update_physics();		// entity_it is a pointer to a list Element which is a pointer to an Entity. To get a Entity object, the iterator must be dereferenced 2 times.
+			// entity_it is a pointer to a list Element which is a pointer to an Entity. To get a Entity object, the iterator must be dereferenced 2 times.
+			(*entity_it)->update_physics();
 		}
 
 		this_thread::sleep_for(chrono::milliseconds(10));	// sleep some time before updating the physics again
@@ -61,7 +64,8 @@ int main()
 
 	// start a separate thread to compute the physics of all objects (not really needed in this case, just to demonstrate the concept)
 	bool physic_thread_running = true;	// flag to signal the thread to terminate
-	thread physic_thread(physic_task, ref(entities), ref(physic_thread_running));		// The first argument is the name of the function/ member function that shall be started in a new thread. if a reference needs to be passed to a thread, it must be wrapped in std::ref()
+	// The first argument is the name of the function/ member function that shall be started in a new thread. if a reference needs to be passed to a thread, it must be wrapped in std::ref()
+	thread physic_thread(physic_task, ref(entities), ref(physic_thread_running));
 
 	GameSettings::game_state_t last_game_state = settings.game_state;		// always store the last game_state to detect a change in game_state
 	

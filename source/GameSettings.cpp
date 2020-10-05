@@ -191,7 +191,8 @@ void SettingsFileParser::saveFontID()
 	if (!fp.good())	// check error state
 		return;
 
-	fp.seekp(sizeof(file_content.hi_score) + sizeof(file_content.boundary_id), fp.beg);		// set the position of the output stream filepointer. The first Parameter marks the offset from the second Parameter
+	// set the position of the output stream filepointer. The first Parameter marks the offset from the second Parameter
+	fp.seekp(sizeof(file_content.hi_score) + sizeof(file_content.boundary_id), fp.beg);
 	fp.write((char*)& file_content.font_id, sizeof(file_content.font_id));
 
 	updateChecksum();
@@ -233,7 +234,8 @@ void SettingsFileParser::saveNumWordsSpawn()
 	if (!fp.good())	// check error state
 		return;
 
-	fp.seekp(sizeof(file_content.hi_score) + sizeof(file_content.boundary_id) + sizeof(file_content.font_id), fp.beg);		// set the position of the output stream filepointer. The first Parameter marks the offset from the second Parameter
+	// set the position of the output stream filepointer. The first Parameter marks the offset from the second Parameter
+	fp.seekp(sizeof(file_content.hi_score) + sizeof(file_content.boundary_id) + sizeof(file_content.font_id), fp.beg);
 	fp.write((char*)& file_content.num_words_spawn, sizeof(file_content.num_words_spawn));
 
 	updateChecksum();
@@ -246,7 +248,8 @@ unsigned int SettingsFileParser::getNumWordsSpawn()
 }
 
 
-// Default constructor. Because the constructor of the parent class needs an Argument for its constructor (no default constructor), the constructor with its argument must be called here explicitly
+// Default constructor. Because the constructor of the parent class needs an Argument for its constructor (no default constructor),
+// the constructor with its argument must be called here explicitly
 GameSettings::GameSettings() : SettingsFileParser("resources/settings.bin")
 {
 	window_size.x = 1200;
@@ -257,7 +260,8 @@ GameSettings::GameSettings() : SettingsFileParser("resources/settings.bin")
 	csv_delimiter = ';';
 }
 
-// returns a constant reference to the font object of this class. This reference can be supplied to the text objects of this program. As long as a text object uses a reference to this font, the font object shall not be destroyed
+// returns a constant reference to the font object of this class. This reference can be supplied to the text objects of this program.
+// As long as a text object uses a reference to this font, the font object shall not be destroyed
 const sf::Font& GameSettings::getFont()
 {
 	return font;

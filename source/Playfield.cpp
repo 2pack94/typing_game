@@ -9,7 +9,10 @@ extern mutex mutex_glob;	// defined in main.cpp
 
 // Constructor 
 template <typename T>
-Playfield<T>::Playfield(GameSettings& game_settings) : back_btn("<", game_settings.getFont(), 47), restart_btn("RESTART", game_settings.getFont(), 40), word_list_csv(game_settings.wordlist_csv_filename, game_settings.csv_delimiter)	// member initializer list. Initialize the Buttons and the CSVParser
+Playfield<T>::Playfield(GameSettings& game_settings)
+	// member initializer list. Initialize the Buttons and the CSVParser
+	: back_btn("<", game_settings.getFont(), 47), restart_btn("RESTART", game_settings.getFont(), 40),
+	word_list_csv(game_settings.wordlist_csv_filename, game_settings.csv_delimiter)
 {
 	// if a non supported template type for playfield would be used, the program wouldn't compile
 
@@ -54,7 +57,8 @@ inline Playfield<T>::~Playfield()
 }
 
 // follow the rule of three: when one of the following is manually defined, define all of them manually: destructor, copy constructor and copy assignment operator
-// manually define copy constructor and copy assignment operator. the automatically created default copy constructor and copy assignment operator do a member-wise copy between objects. So when a pointer member is copied, only a shallow copy is made (pointer points on the same memory location instead of creating its own memory for the new object)
+// Manually define copy constructor and copy assignment operator. The automatically created default copy constructor and copy assignment operator do a member-wise copy between objects.
+// So when a pointer member is copied, only a shallow copy is made (pointer points on the same memory location instead of creating its own memory for the new object)
 
 // copy assignment operator. is called when an already initialized object is assigned a new value from another existing object
 // playfield_orig: input. right of the '='. Class object which shall be copied to the new object
@@ -107,7 +111,8 @@ template <typename T>
 inline void Playfield<T>::init_boundary(sf::RectangleShape& bound)
 {
 	bound.setSize(sf::Vector2f(boundary_size, boundary_size));
-	bound.setPosition((settings->get_window_size().x / 2) - (bound.getSize().x / 2) + (side_panel_texture.getSize().x / 2), (settings->get_window_size().y / 2) - (bound.getSize().y / 2));	// move to the center
+	// move to the center
+	bound.setPosition((settings->get_window_size().x / 2) - (bound.getSize().x / 2) + (side_panel_texture.getSize().x / 2), (settings->get_window_size().y / 2) - (bound.getSize().y / 2));
 	bound.setOutlineColor(sf::Color::White);
 	bound.setFillColor(sf::Color::Transparent);
 	bound.setOutlineThickness(2.f);
@@ -120,7 +125,8 @@ inline void Playfield<T>::init_boundary(sf::CircleShape& bound)
 {
 	bound.setRadius(boundary_size / 2);
 	bound.setOrigin(bound.getRadius(), bound.getRadius());	// set origin to the center of the circle
-	bound.setPosition(settings->get_window_size().x / 2 + (side_panel_texture.getSize().x / 2), settings->get_window_size().y / 2);	// set the center of the circle to be in the center of the playfield
+	// set the center of the circle to be in the center of the playfield
+	bound.setPosition(settings->get_window_size().x / 2 + (side_panel_texture.getSize().x / 2), settings->get_window_size().y / 2);
 	bound.setOutlineColor(sf::Color::White);
 	bound.setFillColor(sf::Color::Transparent);
 	bound.setOutlineThickness(2.f);
@@ -150,7 +156,8 @@ template <typename T>
 void Playfield<T>::spawn_word(Word& word, const sf::RectangleShape& bound)
 {
 	sf::FloatRect word_rect = word.getGlobalBounds();
-	// the position of word.getGlobalBounds() and the word itself is not the same! the position of the word itself includes a spacing on top of the word (to fit all possible characters), whereas the global boundary adjusts to the current string of the word
+	// the position of word.getGlobalBounds() and the word itself is not the same!
+	// the position of the word itself includes a spacing on top of the word (to fit all possible characters), whereas the global boundary adjusts to the current string of the word
 	float word_pos_diff = word_rect.top - word.getPosition().y;
 
 	// get the area in which the word (in fact the word boundary) can spawn
@@ -187,7 +194,8 @@ template <typename T>
 void Playfield<T>::spawn_word(Word& word, const sf::CircleShape& bound)
 {
 	sf::FloatRect word_rect = word.getGlobalBounds();
-	// the position of word.getGlobalBounds() and the word itself is not the same! the position of the word itself includes a spacing on top of the word (to fit all possible characters), whereas the global boundary adjusts to the current string of the word
+	// the position of word.getGlobalBounds() and the word itself is not the same!
+	// the position of the word itself includes a spacing on top of the word (to fit all possible characters), whereas the global boundary adjusts to the current string of the word
 	float word_pos_diff = word_rect.top - word.getPosition().y;
 
 	// calculate the diagonal / 2 of word_rect (plus 1 pixel additional margin). the center of the word should be at least this far away from the boundary when spawning
@@ -229,7 +237,7 @@ bool Playfield<T>::word_reflection(Word& word, const sf::RectangleShape& bound)
 	unsigned int num_collisions = 0;							// number of boundary edges the word is colliding with
 	bool is_collision_lrtb[4] = { false, false, false, false };	// is collision left right top bottom of the boundary
 	double refl_angle = 0;										// the angle of the word after the collision
-	double sounding_line_angle = 0;								// angle of the sounding line. the sounding line is orthogonal to the collision edge of the boundary and it points at the collision edge.
+	double sounding_line_angle = 0;		// angle of the sounding line. the sounding line is orthogonal to the collision edge of the boundary and it points at the collision edge.
 
 	// get corner points of the word rectangle
 	corner_p[0].x = word_rect.left;
@@ -285,7 +293,8 @@ bool Playfield<T>::word_reflection(Word& word, const sf::RectangleShape& bound)
 	// alternative: calculate the angle between the velocity vector and the sounding line vector with the dot product
 	refl_angle = sounding_line_angle - word.get_angle();
 
-	// reflect the word. the new angle is the opposite angle plus the incidence angle (from the original velocity vector to the soundling line vector) plus the reflection angle (from the sounding line vector to the reflected velocity vector)
+	// reflect the word. the new angle is the opposite angle plus the 
+	// incidence angle (from the original velocity vector to the soundling line vector) plus the reflection angle (from the sounding line vector to the reflected velocity vector)
 	word.set_angle(word.get_angle() + M_PI + 2 * refl_angle);
 
 	// bounce some pixels from the boundary (along the new velocity vector). Because there is a chance that the word is still out of bounds after the reflection (then it would get stuck).
@@ -307,8 +316,10 @@ bool Playfield<T>::word_reflection(Word& word, const sf::CircleShape& bound)
 	float distance = 0;						// distance between a corner point of the word and center of circle boundary
 	unsigned int num_collision_points = 0;	// number of collision points (corners of the word_rect that are colliding)
 	sf::Vector2f collision_center(0, 0);	// center of the collision points
-	double refl_angle = 0;					// the angle of the word after the collision
-	double sounding_line_angle = 0;			// sounding line angle. sounding line vector: from origin of the circle to the collision center/ orthogonal to the tangent of the circle in the collision point
+	// the angle of the word after the collision
+	double refl_angle = 0;
+	// sounding line angle. sounding line vector: from origin of the circle to the collision center/ orthogonal to the tangent of the circle in the collision point
+	double sounding_line_angle = 0;
 
 	// get corner points of the word rectangle
 	corner_p[0].x = word_rect.left;
@@ -349,7 +360,8 @@ bool Playfield<T>::word_reflection(Word& word, const sf::CircleShape& bound)
 	// alternative: calculate the angle between the velocity vector and the sounding line vector with the dot product (but the acos function needed for that has only a output value range of 0...pi)
 	refl_angle = sounding_line_angle - word.get_angle();
 
-	// reflect the word. the new angle is the opposite angle plus the incidence angle (from the original velocity vector to the sounding line vector) plus the reflection angle (from the sounding line vector to the reflected velocity vector)
+	// reflect the word. the new angle is the opposite angle
+	// plus the incidence angle (from the original velocity vector to the sounding line vector) plus the reflection angle (from the sounding line vector to the reflected velocity vector)
 	word.set_angle(word.get_angle() + M_PI + 2 * refl_angle);
 
 	// bounce some pixels from the boundary (along the new velocity vector). Because there is a chance that the word is still out of bounds after the reflection (then it would get stuck).
@@ -399,8 +411,10 @@ inline void Playfield<T>::update()
 			playfield_text[MISSED_WORDS].setString(to_string(missed_words));
 
 			Word* word_tmp = *word_list_it;					// store the current Element to still have a pointer on it after the erase from the list and to delete it afterwards
-			word_list_it = word_list.erase(word_list_it);	// delete the Element from the list pointed by the iterator. return a new iterator with the updated list which points on the Element after the deleted one
-			delete word_tmp;								// after the element is erased from the list, delete must still be called. delete calls the destructor and frees up the memory that was allocated by new
+			// delete the Element from the list pointed by the iterator. return a new iterator with the updated list which points on the Element after the deleted one
+			word_list_it = word_list.erase(word_list_it);
+			// after the element is erased from the list, delete must still be called. delete calls the destructor and frees up the memory that was allocated by new
+			delete word_tmp;
 			collision_cnt_it = collision_cnt.erase(collision_cnt_it);
 		}
 		else
@@ -416,7 +430,9 @@ inline void Playfield<T>::update()
 	{
 		string word_string = word_list_csv.get_random_elem();
 		float word_velo = 100;					// in pixel per second. velocity of the word moving across the screen
-		// word_health = a * b^c * d + e. <d> is the number of letters of the word. with 1 word there is <a> health per letter. the health per letter gets multiplied <b>, but the more words are on the screen, the smaller the health increase per word gets (thats what the power of <c> is doing). <e> is additional health intended to give a reaction time
+		// word_health = a * b^c * d + e. <d> is the number of letters of the word. with 1 word there is <a> health per letter.
+		// the health per letter gets multiplied by <b>, but the more words are on the screen, the smaller the health increase per word gets (thats what the power of <c> is doing).
+		// <e> is additional health intended to give a reaction time
 		double word_health = 0.5 * pow(max_num_words, 0.9) * word_string.size() + 1;
 		Word* new_word = new Word(word_string, settings->getFont(), word_velo, (float)word_health);	// call the constructor and allocate memory. assign a pointer to the created object.
 
@@ -535,7 +551,8 @@ inline void Playfield<T>::mouse_clicked_processor(const sf::Event::MouseButtonEv
 		for (list<Word*>::iterator word_list_it = word_list.begin(); word_list_it != word_list.end(); )	// iterator is used to point at the Elements of the list
 		{
 			Word* word_tmp = *word_list_it;	// store the current Element to still have a pointer on it after the erase from the list and to delete it afterwards
-			word_list_it = word_list.erase(word_list_it);	// delete the Element from the list pointed by the iterator. return a new iterator with the updated list which points on the Element after the deleted one
+			// delete the Element from the list pointed by the iterator. return a new iterator with the updated list which points on the Element after the deleted one
+			word_list_it = word_list.erase(word_list_it);
 			delete word_tmp;	// after the element is erased from the list, delete must still be called. delete calls the destructor and frees up the memory that was allocated by new.
 			collision_cnt_it = collision_cnt.erase(collision_cnt_it);
 		}

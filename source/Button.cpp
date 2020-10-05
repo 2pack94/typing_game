@@ -112,7 +112,8 @@ inline void Button::update()
 	btn_shape.setSize(rect_size);
 
 	// set the text position
-	// the position of text.getGlobalBounds() and the text itself is not the same! the position of the text itself includes a spacing on top of the text (to fit all possible characters), whereas the global boundary adjusts to the current string of the text
+	// the position of text.getGlobalBounds() and the text itself is not the same!
+	// the position of the text itself includes a spacing on top of the text (to fit all possible characters), whereas the global boundary adjusts to the current string of the text
 	float text_pos_diff = btn_text.getGlobalBounds().top - btn_text.getPosition().y;
 	btn_text.setPosition(btn_shape.getPosition().x + margin, btn_shape.getPosition().y + margin - text_pos_diff);	// set text position in the middle of the rectangle
 }

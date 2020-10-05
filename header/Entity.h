@@ -6,7 +6,8 @@
 /////////////////////////////////////////////////////////////////
 /// class hierarchy:
 ///		derived classes inherit everything from its parent class exept constructors, the destructor and the allocation operator
-///		the private part of a class can only be accessed by the class itself. a derived class can not directly access the private part of its parent class. use 'protected' for access for derived classes
+///		the private part of a class can only be accessed by the class itself.
+///		a derived class can not directly access the private part of its parent class. use 'protected' for access for derived classes
 ///		order of the constructor invocation: constructor of parent class -> constructors of the member initializer list of the derived list -> constructor of the derived class
 ///		If a constructor of a member object is not explicitly listed in the member initializer list, the default constructor of the member object is called implicitly
 /// lists in C++:
@@ -35,7 +36,9 @@
 class Entity
 {
 public:
-	virtual ~Entity() {}	// virtual destructor. every class that inherits from this class should also manually define its virtual Destructor. So the correct destructor/ sequence of destructors of the class beloning to the object can be called when using delete or going out of scope (see polymorphism).
+	// virtual destructor. every class that inherits from this class should also manually define its virtual Destructor.
+	// So the correct destructor/ sequence of destructors of the class beloning to the object can be called when using delete or going out of scope (see polymorphism).
+	virtual ~Entity() {}
 	// pure virtual functions:
 	virtual void update() = 0;																			// for classes that need to be periodically updated
 	virtual void update_physics() = 0;																	// for classes that have a physic

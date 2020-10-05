@@ -77,7 +77,8 @@ private:
 
 
 // contains different information used by other classes. inherits from SettingsFileParser.
-// most of the members can be set and get. every class that needs access to the members should store a pointer to the same GameSettings object, so the same information is shared across every class.
+// most of the members can be set and get.
+// every class that needs access to the members should store a pointer to the same GameSettings object, so the same information is shared across every class.
 class GameSettings : public SettingsFileParser
 {
 public:

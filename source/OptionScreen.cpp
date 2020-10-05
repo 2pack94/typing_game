@@ -65,7 +65,8 @@ void OptionScreen::update_positions()
 	for (unsigned int i = 0; i < NUM_TEXTS; i++)
 	{
 		text_pos_diff = options_text_descr[i].getGlobalBounds().top - options_text_descr[i].getPosition().y;
-		options_text_descr[i].setPosition(settings->get_window_size().x / 2 - options_text_descr[i].getGlobalBounds().width - margin_hor, vert_pos_cur - (text_pos_diff + options_text_descr[i].getGlobalBounds().height / 2));
+		options_text_descr[i].setPosition(settings->get_window_size().x / 2 - options_text_descr[i].getGlobalBounds().width - margin_hor,
+			vert_pos_cur - (text_pos_diff + options_text_descr[i].getGlobalBounds().height / 2));
 
 		text_pos_diff = options_text_val[i].getGlobalBounds().top - options_text_val[i].getPosition().y;
 		options_text_val[i].setPosition(settings->get_window_size().x / 2 + text_right_margin_hor, vert_pos_cur - (text_pos_diff + options_text_val[i].getGlobalBounds().height / 2));

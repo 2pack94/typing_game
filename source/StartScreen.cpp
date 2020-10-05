@@ -1,7 +1,9 @@
 #include "StartScreen.h"
 
 // Constructor
-StartScreen::StartScreen(GameSettings& game_settings) : start_btn("START >", game_settings.getFont(), 40), exit_btn("< EXIT", game_settings.getFont(), 40), options_btn("OPTIONS", game_settings.getFont(), 40)	// member initializer list. Initialize the Buttons
+StartScreen::StartScreen(GameSettings& game_settings)
+	// member initializer list. Initialize the Buttons
+	: start_btn("START >", game_settings.getFont(), 40), exit_btn("< EXIT", game_settings.getFont(), 40), options_btn("OPTIONS", game_settings.getFont(), 40)
 {
 	settings = &game_settings;	// save the Address of game_settings in a pointer
 

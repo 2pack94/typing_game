@@ -4,7 +4,9 @@
 using namespace std;
 
 // default Constructor. opens the file and calculates the number of Elements in the file
-CSVParser::CSVParser(const string& csv_filename, char csv_delimiter) : fin(csv_filename)	// member initializer list. fin: open file for input. in the destructor of fin the file gets closed. the destructor is called automatically when this class is destroyed
+CSVParser::CSVParser(const string& csv_filename, char csv_delimiter)
+	// member initializer list. fin: open file for input. in the destructor of fin the file gets closed. the destructor is called automatically when this class is destroyed
+	: fin(csv_filename)
 {
 	filename = csv_filename;
 	delimiter = csv_delimiter;
@@ -16,7 +18,8 @@ CSVParser::CSVParser(const string& csv_filename, char csv_delimiter) : fin(csv_f
 	string row, value;
 
 	// get number of values (that are not empty) in the file
-	while (getline(fin, row))		// getline: Extracts characters from fin and stores them into row until the newline character is found. returns fin, which is in an error state when eof is reached
+	// getline: Extracts characters from fin and stores them into row until the newline character is found. returns fin, which is in an error state when eof is reached
+	while (getline(fin, row))
 	{
 		stringstream ss(row);	// convert row into a stream object
 		while (getline(ss, value, delimiter))		// getline: Extracts characters from ss and stores them into value until the delimiter is found
