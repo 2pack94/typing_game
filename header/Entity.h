@@ -5,7 +5,7 @@
 
 /////////////////////////////////////////////////////////////////
 /// class hierarchy:
-///		derived classes inherit everything from its parent class exept constructors, the destructor and the allocation operator
+///		derived classes inherit everything from its parent class ecxept constructors, the destructor and the allocation operator
 ///		the private part of a class can only be accessed by the class itself.
 ///		a derived class can not directly access the private part of its parent class. use 'protected' for access for derived classes
 ///		order of the constructor invocation: constructor of parent class -> constructors of the member initializer list of the derived list -> constructor of the derived class
@@ -21,7 +21,7 @@
 ///		they can't have objects
 /// virtual functions:
 ///		are used to define a consistent interface for all classes derived from these base classes
-///		every derived class redefines the virual functions (with the same return value/ parameters/ name) for themself
+///		every derived class redefines the virtual functions (with the same return value/ parameters/ name) for themself
 /// pure virtual functions:
 ///		every pure virtual function must be overwritten (with the same return value/ parameters/ name) or the derived class will be also abstract!
 /// polymorphism in C++:
@@ -37,7 +37,7 @@ class Entity
 {
 public:
 	// virtual destructor. every class that inherits from this class should also manually define its virtual Destructor.
-	// So the correct destructor/ sequence of destructors of the class beloning to the object can be called when using delete or going out of scope (see polymorphism).
+	// So the correct destructor/ sequence of destructors of the class belonging to the object can be called when using delete or going out of scope (see polymorphism).
 	virtual ~Entity() {}
 	// pure virtual functions:
 	virtual void update() = 0;																			// for classes that need to be periodically updated

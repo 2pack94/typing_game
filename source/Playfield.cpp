@@ -331,7 +331,8 @@ bool Playfield<T>::word_reflection(Word& word, const sf::CircleShape& bound)
 	corner_p[3].x = word_rect.left + word_rect.width;
 	corner_p[3].y = word_rect.top + word_rect.height;
 
-	// get number of collisions and calculate the center of all collision points. used to reflect the word later. Better than deciding for one corner point in case of more than one collision.
+	// get number of collisions and calculate the center of all collision points. used to reflect the word later.
+	// Better than deciding for one corner point in case of more than one collision.
 	for (unsigned int i = 0; i < sizeof(corner_p) / sizeof(corner_p[0]); i++)
 	{
 		distance = sqrt(pow(corner_p[i].x - bound.getPosition().x, 2) + pow(corner_p[i].y - bound.getPosition().y, 2));	// d = sqrt((x2-x1)^2+(y2-y1)^2)
@@ -357,7 +358,8 @@ bool Playfield<T>::word_reflection(Word& word, const sf::CircleShape& bound)
 	sounding_line_angle = atan2((collision_center.y - bound.getPosition().y), (collision_center.x - bound.getPosition().x));
 
 	// get angle difference between the Word angle and the sounding line angle: this is the incidence angle which is the same as the reflection angle
-	// alternative: calculate the angle between the velocity vector and the sounding line vector with the dot product (but the acos function needed for that has only a output value range of 0...pi)
+	// alternative: calculate the angle between the velocity vector and the sounding line vector with the dot product
+	// (but the acos function needed for that has only a output value range of 0...pi)
 	refl_angle = sounding_line_angle - word.get_angle();
 
 	// reflect the word. the new angle is the opposite angle
@@ -457,7 +459,7 @@ inline void Playfield<T>::update()
 }
 
 // compute the movement, collision and reflection of all Words on the Playfield
-// runs in a seperate physics thread
+// runs in a separate physics thread
 template <typename T>
 inline void Playfield<T>::update_physics()
 {
@@ -473,7 +475,7 @@ inline void Playfield<T>::update_physics()
 			*collision_cnt_it = 0;		// set the collision number for this word to 0
 		else
 			*collision_cnt_it += (unsigned int)collision_ret;
-		if (*collision_cnt_it >= 10)	// if one word has a certain amount of continous collisions, its out of bounds
+		if (*collision_cnt_it >= 10)	// if one word has a certain amount of continuous collisions, its out of bounds
 		{
 			spawn_word(**word_list_it, boundary);
 		}

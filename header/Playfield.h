@@ -12,7 +12,8 @@
 // The class Playfield inherits from Entity
 // displays all the game statistics, a list of the Words on the field and the boundary. Has a restart and back button
 // Template class. The type specifies the boundary of the playfield. Default type: sf::RectangleShape / supported types: sf::RectangleShape, sf::CircleShape
-// because the supported types can't be handled in the same way and have different Member functions, there must be multiple functions defined of the same name that handle every supported type
+// because the supported types can't be handled in the same way and have different Member functions,
+// there must be multiple functions defined of the same name that handle every supported type
 // note: non-virtual Member Functions of e.g. sf::CircleShape can't be called by objects of the Template type T or of the parent type sf::Shape
 template <typename T = sf::RectangleShape> class Playfield : public Entity
 {
@@ -60,7 +61,7 @@ private:
 	T boundary;							// boundary shape with template type
 	sf::Text playfield_text[NUM_TEXTS];	// Game statistics on the left of the screen in Text form
 	std::list<Word*> word_list;				// list to store pointer to Word objects that are registred on the Playfield. Typeparameter for the Template is a pointer on class Word
-	std::list<unsigned int> collision_cnt;	// store the number of continous collisions for every word to detect if its out of bounds. This list shall follow the word list exactly
+	std::list<unsigned int> collision_cnt;	// store the number of continuous collisions for every word to detect if its out of bounds. This list shall follow the word list exactly
 
 	void init_boundary(sf::RectangleShape& bound);
 	void init_boundary(sf::CircleShape& bound);

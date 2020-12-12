@@ -10,7 +10,8 @@ SettingsFileParser::SettingsFileParser(const string& settings_filename) : fp(set
 	filename = settings_filename;
 	file_state = GOOD;
 	// sizeof(struct filecontent) doesn't return the size of the sum of the Elements (because it isn't packed), so the size of every Element must be added individually.
-	expected_file_length = sizeof(file_content.hi_score) + sizeof(file_content.boundary_id) + sizeof(file_content.font_id) + sizeof(file_content.num_words_spawn) + sizeof(file_content.checksum);
+	expected_file_length = sizeof(file_content.hi_score) + sizeof(file_content.boundary_id) + sizeof(file_content.font_id) +
+		sizeof(file_content.num_words_spawn) + sizeof(file_content.checksum);
 
 	init_file_content();
 

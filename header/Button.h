@@ -5,7 +5,7 @@
 
 
 // The Button class inherits from Entity
-// The button conists of a Text and a Rectangle Shape. It reacts on mouse clicks.
+// The button consists of a Text and a Rectangle Shape. It reacts on mouse clicks.
 // The button gets resized through the Character size.
 // The functionality of the button when its clicked must be defined externally.
 class Button : public Entity

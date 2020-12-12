@@ -17,9 +17,12 @@ StartScreen::StartScreen(GameSettings& game_settings)
 
 	// set up the position of the buttons
 	float button_spacing = 150;		// in pixel. vertical spacing between every Button (from middle to middle)
-	start_btn.setPosition(sf::Vector2f((settings->get_window_size().x / 2) - (start_btn.getSize().x / 2), (settings->get_window_size().y / 2) - (button_spacing + (start_btn.getSize().y / 2))));
-	options_btn.setPosition(sf::Vector2f((settings->get_window_size().x / 2) - (options_btn.getSize().x / 2), (settings->get_window_size().y / 2) - (options_btn.getSize().y / 2)));
-	exit_btn.setPosition(sf::Vector2f((settings->get_window_size().x / 2) - (exit_btn.getSize().x / 2), (settings->get_window_size().y / 2) + button_spacing - (exit_btn.getSize().y / 2)));
+	start_btn.setPosition(sf::Vector2f((settings->get_window_size().x / 2) - (start_btn.getSize().x / 2),
+		(settings->get_window_size().y / 2) - (button_spacing + (start_btn.getSize().y / 2))));
+	options_btn.setPosition(sf::Vector2f((settings->get_window_size().x / 2) - (options_btn.getSize().x / 2),
+		(settings->get_window_size().y / 2) - (options_btn.getSize().y / 2)));
+	exit_btn.setPosition(sf::Vector2f((settings->get_window_size().x / 2) - (exit_btn.getSize().x / 2),
+		(settings->get_window_size().y / 2) + button_spacing - (exit_btn.getSize().y / 2)));
 
 	// set up the status message
 	status_msg.setFont(settings->getFont());

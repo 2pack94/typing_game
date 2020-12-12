@@ -64,7 +64,8 @@ int main()
 
 	// start a separate thread to compute the physics of all objects (not really needed in this case, just to demonstrate the concept)
 	bool physic_thread_running = true;	// flag to signal the thread to terminate
-	// The first argument is the name of the function/ member function that shall be started in a new thread. if a reference needs to be passed to a thread, it must be wrapped in std::ref()
+	// The first argument is the name of the function/ member function that shall be started in a new thread.
+	// if a reference needs to be passed to a thread, it must be wrapped in std::ref()
 	thread physic_thread(physic_task, ref(entities), ref(physic_thread_running));
 
 	GameSettings::game_state_t last_game_state = settings.game_state;		// always store the last game_state to detect a change in game_state
@@ -111,7 +112,7 @@ int main()
 		while (window.isOpen())
 		{
 			sf::Event event;
-			while (window.pollEvent(event))		// process all SFML events that occured since the last poll
+			while (window.pollEvent(event))		// process all SFML events that occurred since the last poll
 			{
 				if (event.type == sf::Event::Closed)
 					settings.game_state = GameSettings::EXIT;
