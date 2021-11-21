@@ -12,9 +12,9 @@
 // The class Playfield inherits from Entity
 // displays all the game statistics, a list of the Words on the field and the boundary. Has a restart and back button
 // Template class. The type specifies the boundary of the playfield. Default type: sf::RectangleShape / supported types: sf::RectangleShape, sf::CircleShape
-// because the supported types can't be handled in the same way and have different Member functions,
-// there must be multiple functions defined of the same name that handle every supported type
-// note: non-virtual Member Functions of e.g. sf::CircleShape can't be called by objects of the Template type T or of the parent type sf::Shape
+// because the supported types can't be handled in the same way and have different methods,
+// there must be multiple methods defined of the same name that handle every supported type
+// note: non-virtual methods of e.g. sf::CircleShape can't be called by objects of the Template type T or of the parent type sf::Shape
 template <typename T = sf::RectangleShape> class Playfield : public Entity
 {
 public:
