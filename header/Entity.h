@@ -5,25 +5,26 @@
 
 /////////////////////////////////////////////////////////////////
 /// class hierarchy:
-///		derived classes inherit everything from its parent class ecxept constructors, the destructor and the allocation operator
+///		derived classes inherit everything from its parent class except constructors, the destructor and the allocation operator
 ///		the private part of a class can only be accessed by the class itself.
 ///		a derived class can not directly access the private part of its parent class. use 'protected' for access for derived classes
-///		order of the constructor invocation: constructor of parent class -> constructors of the member initializer list of the derived list -> constructor of the derived class
+///		order of the constructor invocation:
+///		constructor of parent class -> constructors of the member initializer list of the derived class -> constructor of the derived class
 ///		If a constructor of a member object is not explicitly listed in the member initializer list, the default constructor of the member object is called implicitly
 /// lists in C++:
-///		a list 'list<T> a' is a container for objects. list Elements are bidirectional linked (pointer show the memory location of the predecessor and successor)
+///		a list 'list<T> a' is a container for objects. list Elements are bidirectional linked (pointer to the memory location of the predecessor and successor)
 ///		a list stores Elements at non contiguous memory locations. So a class internal iterator must be used to access the Elements.
 /// Reference:
 ///		a Reference 'int& a' is an Alias for an object. It works like a constant pointer (can't change which object is referenced)
 ///		mostly used for call by reference Parameters in functions or as function return values
 /// abstract classes:
-///		they arise when a class has at least one pure virtual function
-///		they can't have objects
+///		An abstract class is a class that has at least one pure virtual function
+///		they cannot be instantiated
 /// virtual functions:
 ///		are used to define a consistent interface for all classes derived from these base classes
-///		every derived class redefines the virtual functions (with the same return value/ parameters/ name) for themself
+///		every derived class can redefine the virtual functions (with the same return value/ parameters/ name) for themself
 /// pure virtual functions:
-///		every pure virtual function must be overwritten (with the same return value/ parameters/ name) or the derived class will be also abstract!
+///		every pure virtual function must be overridden (with the same return value/ parameters/ name) or the derived class will be also abstract!
 /// polymorphism in C++:
 ///		every virtual function call is associated with its corresponding object
 ///		pointer to objects of derived classes can be stored in a vector / array / list of the parent class type
